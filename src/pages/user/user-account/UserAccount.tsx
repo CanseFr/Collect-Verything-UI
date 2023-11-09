@@ -12,7 +12,7 @@ export default function UserAccount(){
     const [hex, setHex] = useState("#fff");
 
     let theme = {
-        "primaryColor" : null
+        "primaryColor" : "jj"
     }
 
     function handleSendValue(){

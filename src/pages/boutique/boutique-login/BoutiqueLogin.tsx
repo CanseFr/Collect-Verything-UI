@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../../context/FakeAuthContext";
 import Button from "@mui/material/Button";
 import LoopBanner from "../../../components/loop-banner/LoopBanner";
+import {LoopBanType} from "../../../types/enum/LoopBanType";
+import {LoopBanChildren} from "../../../types/enum/LoopBanChildren";
 
 
 export default function BoutiqueLogin(){
@@ -14,7 +16,7 @@ export default function BoutiqueLogin(){
     const {login, isAuthenticated,error} = useAuth()
     const navigate = useNavigate()
 
-    function handleSubmit(e){
+    function handleSubmit(e:any){
         e.preventDefault()
         if(email && password) login(email,password)
     }
@@ -26,8 +28,8 @@ export default function BoutiqueLogin(){
     return(
         <>
             <main className={styles.login}>
-                { error !== false && <LoopBanner type={'warning'} children={"Désolé, nous n'avons pas pu vous connecter. Vérifiez que votre adresse e-mail et votre mot de passe sont corrects. Si vous continuez à rencontrer des problèmes, réinitialisez votre mot de passe ou contactez notre support pour obtenir de l'aide."}/>}
-                <form className={styles.form} onSubmit={handleSubmit}>
+                { error !== false && <LoopBanner type={LoopBanType.WAR} children={LoopBanChildren.WRONGPASSORMAIL}/>}
+                <form className={styles.form} >
                     <div className={styles.row}>
                         <label htmlFor="email">Email address</label>
                         <input
@@ -49,7 +51,7 @@ export default function BoutiqueLogin(){
                     </div>
 
                     <div>
-                        <Button type="primary">Login</Button>
+                        <Button onClick={handleSubmit} type="button">Login</Button>
                     </div>
                 </form>
             </main>

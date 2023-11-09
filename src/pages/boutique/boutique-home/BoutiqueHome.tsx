@@ -18,7 +18,7 @@ export default function BoutiqueHome(){
             <Container sx={{display: 'flex', flexDirection: "raw"}}>
                 <Box sx={{display: 'flex', flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                     <Typography mt={"20px"} variant={'h3'}>La plateforme de commerce internationale</Typography>
-                    <Typography mt={"30px"} variant={'p'}>Créez votre entreprise avec Shopify pour vendre en ligne, hors ligne et partout où se trouvent vos clients.</Typography>
+                    <Typography mt={"30px"} variant={'subtitle1'}>Créez votre entreprise avec Shopify pour vendre en ligne, hors ligne et partout où se trouvent vos clients.</Typography>
                     <Button  variant="contained" sx={{marginTop: "30px", bgcolor: "black", color: "white", textDecoration: "none", width: "200px"}}>
                         <NavLink to={'/solution'}>
                             <Typography className={'no-deco-link'} sx={{  color: 'white'}}>Demarer un essai </Typography>

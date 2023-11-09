@@ -2,12 +2,14 @@ import React from 'react';
 import Marquee from 'react-fast-marquee';
 import { Alert } from 'antd';
 
+
 /*
 * Type: "success" ,"info" ,"warning" ,"error"
 *
 * */
 
-const App = ({children, type}) => (
+
+const LoopBanner =({children, type}:{children:string, type:any}) => (
     <Alert
         banner
         type={type}
@@ -18,4 +20,5 @@ const App = ({children, type}) => (
         }
     />
 );
-export default App;
+
+export default LoopBanner;

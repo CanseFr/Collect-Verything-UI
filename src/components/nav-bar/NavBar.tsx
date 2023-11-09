@@ -25,10 +25,10 @@ export default function NavBar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = (event:any) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
+    const handleOpenUserMenu = (event:any) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -194,7 +194,7 @@ export default function NavBar() {
                     {!isAuthenticated &&
                         <>
                             <Button variant="text">
-                                <NavLink sx={{textDecoration: 'none', color: 'black'}} to={"login"}>
+                                <NavLink style={{textDecoration: "none", color: "black"}} to={"login"}>
                                     Login
                                 </NavLink>
                             </Button>

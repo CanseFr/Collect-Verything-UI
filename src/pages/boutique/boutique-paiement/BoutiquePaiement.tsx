@@ -2,7 +2,6 @@ import NavBar from "../../../components/nav-bar/NavBar";
 import Button from "@mui/material/Button";
 import {NavLink} from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import {MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBRadio, MDBRow} from "mdb-react-ui-kit";
 
 export default function BoutiquePaiement() {
     return (

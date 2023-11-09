@@ -1,7 +1,8 @@
 import {createContext, useContext, useReducer, useState} from "react";
 import {jwtDecode} from "jwt-decode";
+import {AuthenticationRequest} from "../types/interface/AuthenticationRequest";
 
-const AuthContext = createContext()
+const AuthContext = createContext<any>(null);
 
 const initialState= {
     user: null,
@@ -12,7 +13,7 @@ const initialState= {
 
 }
 
-function reducer(state, action){
+function reducer(state:any, action:any){
     switch (action.type){
         case 'login':
             return {...state, ...action.payload, isAuthenticated: true}
@@ -23,20 +24,19 @@ function reducer(state, action){
     }
 }
 
-function AuthProvider({children}){
+function AuthProvider({children}:any){
 
     const [{user, isAuthenticated, name, avatar, token}, dispatch] = useReducer(reducer, initialState)
     const [ response, setResponse] = useState()
-    const [error, setError] = useState(false)
+    const [error, setError] = useState<any>(false)
 
-    async function login(email, password) {
-        // Vérification initiale des paramètres
+    async function login(email:string, password:string) {
         if (!email || !password) {
             console.error("Email or password missing");
-            return; // Arrête l'exécution si l'email ou le mot de passe n'est pas fourni.
+            return;
         }
 
-        const user = {
+        let user :AuthenticationRequest = {
             email,
             password
         };
@@ -56,14 +56,13 @@ function AuthProvider({children}){
 
             const responseJson = await response.json();
 
-            // Supposant jwtDecode et dispatch sont déjà définis ailleurs dans votre code
             const decoded = jwtDecode(responseJson.token);
             setError(false)
             dispatch({ type: 'login', payload: decoded });
-            console.log(decoded); // Considérer la suppression de ce log pour la production
+            console.log(decoded);
         } catch (error) {
             console.error('Error during login:', error);
-            setError(error); // Assurer que setError est défini et gère correctement l'erreur
+            setError(error);
         }
     }
 
