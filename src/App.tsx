@@ -9,6 +9,7 @@ import BoutiqueLogin from "./pages/boutique/boutique-login/BoutiqueLogin";
 import BoutiquePaiement from "./pages/boutique/boutique-paiement/BoutiquePaiement";
 import BoutiqueConfirmationPaiement from "./pages/boutique/boutique-confirmation-paiement/BoutiqueConfirmationPaiement";
 import UserAccount from "./pages/user/user-account/UserAccount";
+import BoutiqueRegister from "./pages/boutique/boutique-register/BoutiqueRegister";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/solution" element={<BoutiqueSolutions/>}/>
               <Route path="/prod/1" element={<BoutiqueConsulterSolution/>}/>
               <Route path="/login" element={<BoutiqueLogin/>}/>
+              <Route path="/register" element={<BoutiqueRegister/>}/>
               <Route path="/paiement" element={<BoutiquePaiement/>}/>
               <Route path="/statutpaiement" element={<BoutiqueConfirmationPaiement/>}/>
               <Route path="/account" element={<UserAccount/>}/>

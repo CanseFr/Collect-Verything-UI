@@ -25,10 +25,10 @@ export default function NavBar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const handleOpenNavMenu = (event:any) => {
+    const handleOpenNavMenu = (event: any) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event:any) => {
+    const handleOpenUserMenu = (event: any) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -198,7 +198,13 @@ export default function NavBar() {
                                     Login
                                 </NavLink>
                             </Button>
-                            <Button variant="contained" sx={{bgcolor: "black"}}>Register</Button>
+                            <Button className={'no-deco-link'} variant="contained" sx={{bgcolor: "black"}}>
+                                <NavLink to={"register"}>
+                                    <Typography sx={{color: 'white'}}>
+                                        Register
+                                    </Typography>
+                                </NavLink>
+                            </Button>
                         </>
                     }
 
