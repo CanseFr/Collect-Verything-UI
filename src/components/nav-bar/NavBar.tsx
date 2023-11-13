@@ -14,13 +14,14 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useAuth} from "../../context/FakeAuthContext";
 import {NavLink} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 const pages = ['Solution', 'Tarification', 'Ressource'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavBar() {
 
-    const {user, isAuthenticated, name, avatar, logout, login} = useAuth()
+    const {user, isAuthenticated, name, avatar, logout, login,token} = useAuth()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -42,6 +43,7 @@ export default function NavBar() {
 
     return (
         <AppBar sx={{bgcolor: "white"}} position="static">
+
             <Container maxWidth="xl" sx={{bgcolor: "white"}}>
                 <Toolbar sx={{bgcolor: "white", color: "black"}} disableGutters>
                     <NavLink to={"/"}>

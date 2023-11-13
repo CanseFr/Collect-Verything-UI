@@ -7,13 +7,14 @@ import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import {AlertFix} from "../../../components/alerts/AlertFix";
+import dayjs from "dayjs";
 
 const expression: RegExp = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
 
 export default function BoutiqueRegister() {
     const [firstname, setFirstname] = useState<string>("")
     const [lastname, setLastname] = useState<string>("")
-    const [birthDay, setBirthDay] = useState<any>("")
+    const [birthday, setBirthday] = useState<any>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [confirmPassword, setConfirmPassword] = useState<string>("")
@@ -22,8 +23,12 @@ export default function BoutiqueRegister() {
     const [errorMessage, setErrorMessage] = useState<any>("")
 
     const navigate = useNavigate();
+
+    console.log(dayjs(new Date()).subtract(18, 'year'))
+
+
     function validateForm() {
-        if (!firstname || !lastname || !birthDay || !email || !password || !confirmPassword) {
+        if (!firstname || !lastname || !birthday || !email || !password || !confirmPassword) {
             return 'Vous devez remplir tous les champs';
         }
         if (password.length < 8 || password.length > 15 || confirmPassword.length < 8 || confirmPassword.length > 15) {
@@ -38,10 +43,14 @@ export default function BoutiqueRegister() {
         if (!expression.test(email)) {
             return 'Votre email est incorrect';
         }
+        if (dayjs(birthday).isAfter(dayjs(new Date()).subtract(18, 'year'))) {
+            return 'Vous devez avoir plus de 18 ans';
+        }
         return '';
     }
 
     async function handleRegister() {
+
         const validationError = validateForm();
         if (validationError) {
             setError(true);
@@ -49,7 +58,7 @@ export default function BoutiqueRegister() {
             return;
         }
 
-        const user = { firstname, lastname, email, password };
+        const user = { firstname, lastname, email, password, birthDay: birthday };
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -97,8 +106,8 @@ export default function BoutiqueRegister() {
                                id="standard-size-small"
                                size="small"
                                variant="standard"
-                               error={firstname.length < 5 || firstname.length > 15}
-                               helperText={(firstname.length < 5 || firstname.length > 15) && "Le champ doit comporter entre 5 et 15 caracteres"}
+                               // error={firstname.length < 5 || firstname.length > 15}
+                               // helperText={(firstname.length < 5 || firstname.length > 15) && "Le champ doit comporter entre 5 et 15 caracteres"}
                     />
 
 
@@ -111,7 +120,7 @@ export default function BoutiqueRegister() {
                                variant="standard"
                     />
 
-                    <DatePicker value={birthDay} onChange={(date) => setBirthDay(date)} placeholder={'Date de naissance'}/>
+                    <DatePicker value={birthday} onChange={(date) => setBirthday(date)} placeholder={'Date de naissance'}/>
 
                     <TextField sx={{marginTop: '10px'}}
                                value={email}

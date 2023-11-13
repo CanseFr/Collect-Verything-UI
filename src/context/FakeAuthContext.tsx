@@ -10,7 +10,7 @@ const initialState= {
     name: null,
     token: null,
     avatar: "https://avatars.githubusercontent.com/u/49596442?s=400&u=2b4956d5878a76f9352857c8a1e46d79d2786730&v=4",
-
+    isAdmin: null
 }
 
 function reducer(state:any, action:any){
@@ -26,7 +26,7 @@ function reducer(state:any, action:any){
 
 function AuthProvider({children}:any){
 
-    const [{user, isAuthenticated, name, avatar, token}, dispatch] = useReducer(reducer, initialState)
+    const [{user, isAuthenticated, name, avatar}, dispatch] = useReducer(reducer, initialState)
     const [ response, setResponse] = useState()
     const [error, setError] = useState<any>(false)
 
