@@ -10,6 +10,8 @@ import BoutiquePaiement from "./pages/boutique/boutique-paiement/BoutiquePaiemen
 import BoutiqueConfirmationPaiement from "./pages/boutique/boutique-confirmation-paiement/BoutiqueConfirmationPaiement";
 import UserAccount from "./pages/user/user-account/UserAccount";
 import BoutiqueRegister from "./pages/boutique/boutique-register/BoutiqueRegister";
+import AdministrationDashboard from "./pages/administration/administration-dashboard/AdministrationDashboard";
+import {AdministrationClients} from "./pages/administration/administration-clients/AdministrationClients";
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
               <Route path="/paiement" element={<BoutiquePaiement/>}/>
               <Route path="/statutpaiement" element={<BoutiqueConfirmationPaiement/>}/>
               <Route path="/account" element={<UserAccount/>}/>
+              <Route path="/admin" element={<AdministrationDashboard/>}>
+                <Route path="clients" element={<AdministrationClients/>}/>
+              </Route>
               <Route path="*" element={<BoutiqueHome/>}/>
             </Routes>
           </BrowserRouter>

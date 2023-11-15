@@ -13,18 +13,20 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useAuth} from "../../context/FakeAuthContext";
-import {NavLink} from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const pages = ['Solution', 'Tarification', 'Ressource'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settingsAdmin = ['Administration', 'Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavBar() {
 
-    const {user, isAuthenticated, name, avatar, logout, login,token} = useAuth()
+    const {isAuthenticated, avatar, logout, role} = useAuth()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+
+    const navigate = useNavigate()
 
     const handleOpenNavMenu = (event: any) => {
         setAnchorElNav(event.currentTarget);
@@ -43,7 +45,6 @@ export default function NavBar() {
 
     return (
         <AppBar sx={{bgcolor: "white"}} position="static">
-
             <Container maxWidth="xl" sx={{bgcolor: "white"}}>
                 <Toolbar sx={{bgcolor: "white", color: "black"}} disableGutters>
                     <NavLink to={"/"}>
@@ -176,19 +177,37 @@ export default function NavBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        {setting === "Profile" && <Typography textAlign="center">{setting}</Typography>}
-                                        {setting === "Account" && <Typography textAlign="center">
-                                            <NavLink to={"/account"}>
-                                                {setting}
-                                            </NavLink>
-                                        </Typography>
-                                        }
-                                        {setting === "Dashboard" && <Typography textAlign="center">{setting}</Typography>}
-                                        {setting === "Logout" && <Typography onClick={logout} textAlign="center">{setting}</Typography>}
-                                    </MenuItem>
-                                ))}
+
+                                {role === 'ROLE_ADMIN' ?
+
+                                    <>
+                                        {settingsAdmin.map((setting) => (
+                                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                                {setting === "Administration" && <NavLink to={"/admin"}><Typography sx={{color: 'red'}} textAlign="center">{setting}</Typography></NavLink>}
+                                                {setting === "Profile" && <Typography textAlign="center">{setting}</Typography>}
+                                                {setting === "Account" && <Typography textAlign="center"><NavLink to={"/account"}>{setting}</NavLink></Typography>}
+                                                {setting === "Dashboard" && <Typography textAlign="center">{setting}</Typography>}
+                                                {setting === "Logout" && <Typography onClick={logout} textAlign="center">{setting}</Typography>}
+                                            </MenuItem>
+                                        ))}
+                                    </>
+
+
+                                    :
+                                    <>
+                                        {settings.map((setting) => (
+                                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                                {setting === "Profile" && <Typography textAlign="center">{setting}</Typography>}
+                                                {setting === "Account" && <Typography textAlign="center"><NavLink to={"/account"}>{setting}</NavLink></Typography>}
+                                                {setting === "Dashboard" && <Typography textAlign="center">{setting}</Typography>}
+                                                {setting === "Logout" && <Typography onClick={logout} textAlign="center">{setting}</Typography>}
+                                            </MenuItem>
+                                        ))}
+
+                                    </>
+                                }
+
+
                             </Menu>
                         </Box>
                     }
