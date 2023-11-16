@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {AuthProvider} from "./context/FakeAuthContext";
+import {BrowserRouter, Navigate, Outlet, Route, Routes} from "react-router-dom";
+import {AuthProvider, useAuth} from "./context/FakeAuthContext";
 import BoutiqueHome from "./pages/boutique/boutique-home/BoutiqueHome";
 import BoutiqueSolutions from "./pages/boutique/boutique-solutions/BoutiqueSolutions";
 import BoutiqueConsulterSolution from "./pages/boutique/boutique-consulter-solution/BoutiqueConsulterSolution";
@@ -12,6 +12,18 @@ import UserAccount from "./pages/user/user-account/UserAccount";
 import BoutiqueRegister from "./pages/boutique/boutique-register/BoutiqueRegister";
 import AdministrationDashboard from "./pages/administration/administration-dashboard/AdministrationDashboard";
 import {AdministrationClients} from "./pages/administration/administration-clients/AdministrationClients";
+
+const PrivateRoute = ()=>{
+// const PrivateRoute = ({isAdmin}:any)=>{
+  const { role } = useAuth(); // Supposons que `useAuth` fournit l'objet utilisateur actuel
+  // Vérifier si l'utilisateur est un administrateur
+  if (role !== 'ROLE_ADMIN') {
+  // if (isAdmin && user.role !== 'ROLE_ADMIN') {
+    return <Navigate to="/" replace />;
+  }
+  return <Outlet />; // Rendre les composants enfants pour les routes autorisées
+
+}
 
 function App() {
   return (
@@ -27,8 +39,10 @@ function App() {
               <Route path="/paiement" element={<BoutiquePaiement/>}/>
               <Route path="/statutpaiement" element={<BoutiqueConfirmationPaiement/>}/>
               <Route path="/account" element={<UserAccount/>}/>
-              <Route path="/admin" element={<AdministrationDashboard/>}>
-                <Route path="clients" element={<AdministrationClients/>}/>
+              <Route element={<PrivateRoute/>}>
+                <Route path="/admin" element={<AdministrationDashboard/>}>
+                  <Route path="clients" element={<AdministrationClients/>}/>
+                </Route>
               </Route>
               <Route path="*" element={<BoutiqueHome/>}/>
             </Routes>

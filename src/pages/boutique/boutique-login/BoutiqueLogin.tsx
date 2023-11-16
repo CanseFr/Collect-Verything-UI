@@ -26,7 +26,6 @@ export default function BoutiqueLogin() {
         if (isAuthenticated) navigate("/app", {replace: true})
     }, [isAuthenticated, navigate]);
 
-
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -45,7 +44,6 @@ export default function BoutiqueLogin() {
         <>
             {error !== false && <LoopBanner type={LoopBanType.WAR} children={LoopBanChildren.WRONGPASSORMAIL}/>}
             <Container sx={{height: '200px',marginTop: '20vh'}} maxWidth="sm">
-
                     <Box sx={{ boxShadow: '10px 5px 5px #c2c2c2',display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', height: '40vh', border: '1px solid #cbcbcb', borderRadius: '15px'}}>
                         <Form
                             name="basic"
@@ -89,9 +87,7 @@ export default function BoutiqueLogin() {
                             </Form.Item>
                         </Form>
                     </Box>
-
             </Container>
-
         </>
     )
 }
