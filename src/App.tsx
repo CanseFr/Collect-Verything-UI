@@ -14,15 +14,11 @@ import AdministrationDashboard from "./pages/administration/administration-dashb
 import {AdministrationClients} from "./pages/administration/administration-clients/AdministrationClients";
 
 const PrivateRoute = ()=>{
-// const PrivateRoute = ({isAdmin}:any)=>{
-  const { role } = useAuth(); // Supposons que `useAuth` fournit l'objet utilisateur actuel
-  // Vérifier si l'utilisateur est un administrateur
+  const { role } = useAuth();
   if (role !== 'ROLE_ADMIN') {
-  // if (isAdmin && user.role !== 'ROLE_ADMIN') {
     return <Navigate to="/" replace />;
   }
-  return <Outlet />; // Rendre les composants enfants pour les routes autorisées
-
+  return <Outlet />;
 }
 
 function App() {

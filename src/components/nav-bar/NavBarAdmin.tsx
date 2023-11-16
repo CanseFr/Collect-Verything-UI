@@ -8,6 +8,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import {NavLink, useNavigate} from "react-router-dom";
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -45,7 +46,7 @@ export const NavBarAdmin = () =>{
         getItem(<Avatar onClick={handleDashBoard} alt="Click & Verything" src="assets/logo.png"/> ,
             'grp', null, [
                 getItem(  'Dashboard', '1',<DashboardIcon/>),
-                getItem(  'Clients', '2',<SupervisedUserCircleIcon/>),
+                getItem(  'Clients', '2',<NavLink to={"/admin/clients"}><SupervisedUserCircleIcon/></NavLink>),
                 getItem(  'Profil', '3',<PersonIcon/>),
                 getItem(  'Utilisateurs', '4',<ShowChartIcon/>),
                 getItem('Facturation', '5',<PointOfSaleIcon/> ),

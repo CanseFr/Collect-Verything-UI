@@ -16,6 +16,9 @@ const initialState = {
 function reducer(state: any, action: any) {
     switch (action.type) {
         case 'role':
+            console.log('ici')
+            console.log(action.payload)
+            console.log('ici')
             return {...state, role :action.payload}
         case 'login':
             return {...state, ...action.payload, isAuthenticated: true}
