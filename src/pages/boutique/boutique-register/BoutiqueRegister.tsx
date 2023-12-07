@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import {DatePicker} from 'antd';
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import {AlertFix} from "../../../components/alerts/AlertFix";
 import dayjs from "dayjs";
@@ -23,8 +23,17 @@ export default function BoutiqueRegister() {
     const [errorMessage, setErrorMessage] = useState<any>("")
 
     const navigate = useNavigate();
+    const location = useLocation();
 
-    console.log(dayjs(new Date()).subtract(18, 'year'))
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const emailParam = queryParams.get('email');
+        if (emailParam) { setEmail(emailParam)}
+    }, []);
+
+
+
+    // console.log(dayjs(new Date()).subtract(18, 'year'))
 
 
     function validateForm() {
