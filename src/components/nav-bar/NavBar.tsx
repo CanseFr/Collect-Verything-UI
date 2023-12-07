@@ -51,7 +51,7 @@ export default function NavBar() {
                         <Avatar alt="Click & Verything" src="assets/logo.png"/>
                     </NavLink>
                     <Box display={"flex"} flexDirection={"column"} marginRight={'30px'}>
-                        <NavLink to={"/"}>
+                        <NavLink className={'no-deco-link'}  to={"/"}>
                             <Typography variant="h6" noWrap component="a" sx={{
                                 ml: 4,
                                 display: {xs: 'none', md: 'flex'},
@@ -65,7 +65,7 @@ export default function NavBar() {
                                 Collect
                             </Typography>
                         </NavLink>
-                        <NavLink to={"/"}>
+                        <NavLink className={'no-deco-link'}  to={"/"}>
 
                             <Typography variant="h6" noWrap component="a" sx={{
                                 ml: 4,
@@ -114,14 +114,13 @@ export default function NavBar() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">
+                                    <Typography textAlign="center" sx={{fontWeight: 'bold'}}>
                                         {page}
                                     </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                     <Typography
                         variant="h5"
                         noWrap
@@ -138,14 +137,14 @@ export default function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Collect & Verything
                     </Typography>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{my: 2, color: 'black', display: 'block'}}
+                                sx={{my: 2, color: 'black', display: 'block',textTransform: "none", fontWeight: 'bold'}}
                             >
                                 <NavLink className="no-deco-link" to={"/solution"}>
                                     {page}
@@ -214,15 +213,15 @@ export default function NavBar() {
 
                     {!isAuthenticated &&
                         <>
-                            <Button variant="text">
-                                <NavLink style={{textDecoration: "none", color: "black"}} to={"login"}>
-                                    Login
+                            <Button variant="text" sx={{textTransform: "none"}}>
+                                <NavLink style={{textDecoration: "none", color: "black", fontWeight: 'bold'}} to={"login"}>
+                                    Se connecter
                                 </NavLink>
                             </Button>
-                            <Button className={'no-deco-link'} variant="contained" sx={{bgcolor: "black"}}>
+                            <Button className={'no-deco-link'} variant="contained" sx={{bgcolor: "black", borderRadius: "30px", textTransform: "none"}}>
                                 <NavLink to={"register"}>
-                                    <Typography sx={{color: 'white'}}>
-                                        Register
+                                    <Typography className={'no-deco-link'}  variant={'body1'} sx={{color: 'white', fontWeight: 'bold'}}>
+                                        Démarer un essai
                                     </Typography>
                                 </NavLink>
                             </Button>
